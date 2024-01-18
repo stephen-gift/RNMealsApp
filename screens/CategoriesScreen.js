@@ -1,9 +1,10 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { CATEGORIES } from "../data/dummyData";
+import CategoryGridTile from "../components/CategoryGridTile";
 
-function renderCategoryItem(item) {
-  return;
+function renderCategoryItem(itemData) {
+  return <CategoryGridTile title={itemData.item.title} />;
 }
 
 export default function CategoriesScreen() {
