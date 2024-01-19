@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import MealDetail from "./MealDetail";
 
 export default function MealItem({
   id,
@@ -37,11 +38,11 @@ export default function MealItem({
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detail}>{duration} </Text>
-            <Text style={styles.detail}>{complexity.toUpperCase()}</Text>
-            <Text style={styles.detail}>{affordability.toUpperCase()}</Text>
-          </View>
+          <MealDetail
+            duration={duration}
+            affordability={affordability}
+            complexity={complexity}
+          />
         </View>
       </Pressable>
     </View>
@@ -76,19 +77,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18,
     margin: 8,
-  },
-  details: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-  },
-  detail: {
-    fontSize: 12,
-    marginHorizontal: 4,
-    borderColor: "#cccccc",
-    borderRightWidth: 1,
-
-    padding: 4,
   },
 });
