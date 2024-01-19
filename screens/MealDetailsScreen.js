@@ -11,20 +11,27 @@ import { MEALS } from "../data/dummyData";
 import MealDetail from "../components/MealDetail";
 import Subtitle from "../components/MealDetailItems.js/Subtitle";
 import List from "../components/MealDetailItems.js/List";
+import IconButton from "../components/IconButton";
 
 export default function MealDetailsScreen({ route, navigation }) {
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  function HeaderButtonPressHandler() {
+  function headerButtonPressHandler() {
     console.log("pressed");
   }
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <Button title="Tap Me" onPress={HeaderButtonPressHandler} />;
+        return (
+          <IconButton
+            onPress={headerButtonPressHandler}
+            icon={"star"}
+            color={"white"}
+          />
+        );
       },
     });
   }, []);
