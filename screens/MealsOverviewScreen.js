@@ -20,16 +20,29 @@ export default function MealsOverviewScreen({ route, navigation }) {
     });
   }, [catID, navigation]);
 
+  // **********DONE MYSELF**********
+  // function mealDetailsHandler(itemData) {
+  //   navigation.navigate("MealDetails");
+  // }
+
   function renderMealItem(itemData) {
     const item = itemData.item;
     const mealItemProps = {
+      id: item.id,
       title: item.title,
       imageUrl: item.imageUrl,
       affordability: item.affordability,
       complexity: item.complexity,
       duration: item.duration,
     };
-    return <MealItem {...mealItemProps} />;
+    return (
+      <MealItem
+        {...mealItemProps}
+
+        // **********DONE MYSELF**********
+        //  onPress={mealDetailsHandler}
+      />
+    );
   }
 
   return (

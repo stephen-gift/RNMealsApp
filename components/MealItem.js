@@ -7,20 +7,30 @@ import {
   View,
 } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MealItem({
+  id,
   title,
   imageUrl,
   affordability,
   complexity,
   duration,
 }) {
+  const navigation = useNavigation();
+
+  function mealDetailsHandler(itemData) {
+    navigation.navigate("MealDetails", {
+      mealId: id,
+    });
+  }
+
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => (pressed ? styles.buttonPressed : {})}
-        // onPress={onPress}
+        onPress={mealDetailsHandler}
       >
         <View style={styles.innerCOntainer}>
           <View>
@@ -28,7 +38,7 @@ export default function MealItem({
             <Text style={styles.title}>{title}</Text>
           </View>
           <View style={styles.details}>
-            <Text style={styles.detail}>{duration}   </Text>
+            <Text style={styles.detail}>{duration} </Text>
             <Text style={styles.detail}>{complexity.toUpperCase()}</Text>
             <Text style={styles.detail}>{affordability.toUpperCase()}</Text>
           </View>
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 12,
     marginHorizontal: 4,
-    borderColor: '#cccccc',
+    borderColor: "#cccccc",
     borderRightWidth: 1,
 
     padding: 4,
