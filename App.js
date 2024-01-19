@@ -7,20 +7,39 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealDetailsScreen from "./screens/MealDetailsScreen";
 import FavouritesScreen from "./screens/FavouritesScreen";
+import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigator() {
+function DrawerNavigator({ route }) {
   return (
     <Drawer.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerStyle: { backgroundColor: "#351401" },
         headerTintColor: "#fff",
         sceneContainerStyle: {
           backgroundColor: "#3f2f25",
         },
-      }}
+        drawerContentStyle: {
+          backgroundColor: "#351401",
+        },
+        drawerInactiveTintColor: "white",
+        drawerActiveTintColor: "#351401",
+        drawerActiveBackgroundColor: "#e4baa1",
+        drawerIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "DrawerCategoriesScreen") {
+            iconName = focused ? "list-circle" : "list-circle-outline";
+          } else if (route.name === "DrawerFavouritesScreen") {
+            iconName = focused ? "star" : "star-outline";
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
     >
       <Drawer.Screen
         name="DrawerCategoriesScreen"
