@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { MEALS } from "../data/dummyData";
 import MealDetail from "../components/MealDetail";
 import Subtitle from "../components/MealDetailItems.js/Subtitle";
@@ -15,6 +15,8 @@ import IconButton from "../components/IconButton";
 import { FavouriteContext } from "../store/context/favourites-context";
 
 export default function MealDetailsScreen({ route, navigation }) {
+  const [forceUpdate, setForceUpdate] = useState(0);
+
   const favouriteMealsCtx = useContext(FavouriteContext);
   const mealId = route.params.mealId;
 
@@ -26,9 +28,10 @@ export default function MealDetailsScreen({ route, navigation }) {
     if (mealIsFavourite) {
       favouriteMealsCtx.removeFavourites(mealId);
     } else {
-      favouriteMealsCtx.removeFavourites(mealId);
+      favouriteMealsCtx.addFavourites(mealId);
     }
     console.log("pressed");
+    setForceUpdate((prev) => prev + 1);
   }
 
   useLayoutEffect(() => {
