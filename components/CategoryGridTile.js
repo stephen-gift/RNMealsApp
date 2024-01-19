@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
   },
+  buttonPressed: {
+    opacity: 0.5,
+  },
   innerContainer: {
     flex: 1,
     padding: 16,
