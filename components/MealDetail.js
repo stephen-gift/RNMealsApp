@@ -1,12 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function MealDetail({ duration, complexity, affordability }) {
+export default function MealDetail({
+  duration,
+  complexity,
+  affordability,
+  style,
+  textStyle,
+}) {
   return (
-    <View style={styles.details}>
-      <Text style={styles.detail}>{duration} </Text>
-      <Text style={styles.detail}>{complexity.toUpperCase()}</Text>
-      <Text style={styles.detail}>{affordability.toUpperCase()}</Text>
+    <View style={[styles.details, style]}>
+      <Text style={[styles.detail, textStyle]}>{duration} </Text>
+      <Text style={[styles.detail, textStyle]}>{complexity.toUpperCase()}</Text>
+      <Text style={[styles.detail, textStyle]}>
+        {affordability.toUpperCase()}
+      </Text>
     </View>
   );
 }
@@ -21,9 +29,6 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 12,
     marginHorizontal: 4,
-    borderColor: "#cccccc",
-    borderRightWidth: 1,
-
     padding: 4,
   },
 });
