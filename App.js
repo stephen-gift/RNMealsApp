@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
@@ -11,6 +11,8 @@ import MealDetailsScreen from "./screens/MealDetailsScreen";
 import FavouritesScreen from "./screens/FavouritesScreen";
 import { Ionicons } from "@expo/vector-icons";
 import FavouriteContextProvider from "./store/context/favourites-context";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -63,7 +65,8 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavouriteContextProvider>
+      {/* <FavouriteContextProvider> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="MealsCategories"
@@ -93,7 +96,8 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavouriteContextProvider>
+      </Provider>
+      {/* </FavouriteContextProvider> */}
     </>
   );
 }
