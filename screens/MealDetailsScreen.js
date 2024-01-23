@@ -12,23 +12,30 @@ import MealDetail from "../components/MealDetail";
 import Subtitle from "../components/MealDetailItems.js/Subtitle";
 import List from "../components/MealDetailItems.js/List";
 import IconButton from "../components/IconButton";
-import { FavouriteContext } from "../store/context/favourites-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavourite, removeFavourite } from "../store/redux/favourites";
+// import { FavouriteContext } from "../store/context/favourites-context";
 
 export default function MealDetailsScreen({ route, navigation }) {
+  const favouriteMealID = useSelector((state) => state.favouritesMeals.ids);
+  const dispatch = useDispatch();
+
   const [forceUpdate, setForceUpdate] = useState(0);
 
-  const favouriteMealsCtx = useContext(FavouriteContext);
+  // const favouriteMealsCtx = useContext(FavouriteContext);
   const mealId = route.params.mealId;
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
-  const mealIsFavourite = favouriteMealsCtx.id.includes(mealId);
+  const mealIsFavourite = favouriteMealID.includes(mealId);
 
   function changeFavouriteStatusHandler() {
     if (mealIsFavourite) {
-      favouriteMealsCtx.removeFavourites(mealId);
+      // favouriteMealsCtx.removeFavourites(mealId);
+      dispatch(removeFavourite({ id: mealId }));
     } else {
-      favouriteMealsCtx.addFavourites(mealId);
+      // favouriteMealsCtx.addFavourites(mealId);
+      dispatch(addFavourite({ id: mealId }));
     }
     console.log("pressed");
     setForceUpdate((prev) => prev + 1);
